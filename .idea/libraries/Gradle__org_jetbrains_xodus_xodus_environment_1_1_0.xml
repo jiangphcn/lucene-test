@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.xodus:xodus-environment:1.1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.xodus/xodus-environment/1.1.0/f2d9df13d718ff973aa90a901bc234e95f255e8c/xodus-environment-1.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.xodus/xodus-environment/1.1.0/3f11c1efc21701840299a08381bebd3b7fcd5121/xodus-environment-1.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

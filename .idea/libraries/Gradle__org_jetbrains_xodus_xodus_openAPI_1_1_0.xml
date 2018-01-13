@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.xodus:xodus-openAPI:1.1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.xodus/xodus-openAPI/1.1.0/13a61c8bb98a04dea516a8db7250701090a3861f/xodus-openAPI-1.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.xodus/xodus-openAPI/1.1.0/867e894fea04e8a014f768066dbc2cc448c415b3/xodus-openAPI-1.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
