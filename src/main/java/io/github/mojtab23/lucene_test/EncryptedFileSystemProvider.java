@@ -24,6 +24,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.channels.FileChannel;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -240,14 +241,18 @@ public class EncryptedFileSystemProvider extends FileSystemProvider {
 
 
     private EncryptedFileSystem findFileSystem(Path path) {
-        for (Path key : filesystems.keySet()) {
+        if (path instanceof EncryptedFileSystemPath) {
+            return ((EncryptedFileSystemPath) path).encFs;
+        } else {
+            for (Path key : filesystems.keySet()) {
 
-            if (path.startsWith(key)) {
-                return filesystems.get(key);
+                if (path.startsWith(key)) {
+                    return filesystems.get(key);
+                }
+
             }
-
+            throw new FileSystemNotFoundException("There is no FileSystem covering this path.");
         }
-        throw new FileSystemNotFoundException("There is no FileSystem covering this path.");
     }
 
 
@@ -484,7 +489,14 @@ public class EncryptedFileSystemProvider extends FileSystemProvider {
             Path file,
             Set<? extends OpenOption> options,
             FileAttribute<?>... attrs
-    ) {
+    ) throws IOException {
+        final EncryptedFileSystemPath path = EncryptedFileSystemPath.checkPath(file);
+        return new EncFileChannel(EncryptedFileSystem.dismantle(file), path.encFs, options, attrs);
+    }
+
+
+    @Override
+    public FileChannel newFileChannel(Path file, Set<? extends OpenOption> options, FileAttribute<?>... attrs) throws IOException {
         final EncryptedFileSystemPath path = EncryptedFileSystemPath.checkPath(file);
         return new EncFileChannel(EncryptedFileSystem.dismantle(file), path.encFs, options, attrs);
     }

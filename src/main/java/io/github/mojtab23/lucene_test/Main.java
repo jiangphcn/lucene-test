@@ -35,7 +35,7 @@ public class Main {
         final FileSystem fs = provider.newFileSystem(uri, env);
         Path path = fs.getPath("C:\\Users\\Mojtaba\\Desktop\\cryptofs", "/test/text.enc");
         OutputStream outStream = provider.newOutputStream(path);
-        outStream.write("test".getBytes());
+        outStream.write("test2".getBytes());
         outStream.close();
         final InputStream inputStream1 = Files.newInputStream(Paths.get("C:\\Users\\Mojtaba\\Desktop\\cryptofs\\test\\test.txt"));
         final InputStream inputStream = provider.newInputStream(path);
