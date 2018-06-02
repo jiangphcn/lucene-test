@@ -33,15 +33,17 @@ import java.util.Set;
  */
 
 class EncryptedFileSystem extends FileSystem {
+    final SecretKeySpec secretKeySpec;
+    private final Path rootPath;
+    private final Boolean needMac;
     private final FileSystemProvider provider;
     private final FileSystem subFileSystem = FileSystems.getDefault();
-     final SecretKeySpec secretKeySpec;
-     final Path rootPath;
 
-    EncryptedFileSystem(FileSystemProvider provider, Path rootPath, SecretKeySpec secretKeySpec) {
+    EncryptedFileSystem(FileSystemProvider provider, Path rootPath, SecretKeySpec secretKeySpec, Boolean needMac) {
         this.provider = provider;
         this.rootPath = rootPath;
         this.secretKeySpec = secretKeySpec;
+        this.needMac = needMac;
     }
 
     static Path dismantle(Path mantle) {

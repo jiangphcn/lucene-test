@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         FileSystemProvider provider = new EncryptedFileSystemProvider();
-        Map<String, byte[]> env = new HashMap<>();
+        Map<String, Object> env = new HashMap<>();
         Path path1 = Paths.get("C:\\Users\\Mojtaba\\Desktop\\cryptofs").normalize();
         final URI uri1 = new File("C:\\Users\\Mojtaba\\Desktop\\cryptofs").toURI();
         System.out.println(uri1);
@@ -25,6 +25,7 @@ public class Main {
 //        env.put(EncryptedFileSystemProvider.CIPHER_ALGORITHM_MODE, "CTR");
 //        env.put(EncryptedFileSystemProvider.CIPHER_ALGORITHM_PADDING, "NoPadding");
         env.put(EncryptedFileSystemProvider.SECRET_KEY, "1234567890abcdef".getBytes()); // your 128 bit key
+        env.put(EncryptedFileSystemProvider.NEED_MAC, Boolean.TRUE); // your 128 bit key
 //        env.put(EncryptedFileSystemProvider.REVERSE_MODE, "true"); // "false" or remove for default mode
 //        env.put(EncryptedFileSystemProvider.FILESYSTEM_ROOT_URI, "file:C:\\Users\\Mojtaba\\Desktop\\cryptofs"); // base directory for file system operations
 //        env.put(EncryptedFileSystemProvider.FILESYSTEM_ROOT_URI, uri1.toString()); // base directory for file system operations

@@ -85,6 +85,7 @@ public class EncryptedFileSystemProvider extends FileSystemProvider {
     public static final String ALGORITHM = "AES";
     public static final String CIPHER_TRANSFORMATION = ALGORITHM + "/CTR/NoPadding";
     public static final String SECRET_KEY = "SecretKey";
+    public static final String NEED_MAC = "NeedMAC";
 
     private final Map<Path, EncryptedFileSystem> filesystems = new HashMap<>();
 
@@ -150,7 +151,10 @@ public class EncryptedFileSystemProvider extends FileSystemProvider {
         final Path rootPath = uriToPath(uri);
 
         byte[] secretKey = (byte[]) env.get(SECRET_KEY);
-
+        Boolean needMac = (Boolean) env.get(NEED_MAC);
+        if (needMac == null) {
+            needMac = Boolean.FALSE;
+        }
         final SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey, ALGORITHM);
 
         synchronized (this.filesystems) {
@@ -163,7 +167,7 @@ public class EncryptedFileSystemProvider extends FileSystemProvider {
             }
 
             final EncryptedFileSystem fileSystem = new EncryptedFileSystem(
-                    this, fileSystemRoot, secretKeySpec);
+                    this, fileSystemRoot, secretKeySpec, needMac);
 
             this.filesystems.put(fileSystemRoot, fileSystem);
             return fileSystem;
